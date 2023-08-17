@@ -9,8 +9,8 @@ class BookingService {
     return this.repository.findAll()
   }
 
-  createBooking({ roomId, guestName, checkInDate, checkOutDate }) {
-    const newBooking = new Booking(roomId, guestName, checkInDate, checkOutDate)
+  createBooking({ user, roomId, guestName, checkInDate, checkOutDate }) {
+    const newBooking = new Booking({ user, roomId, guestName, checkInDate, checkOutDate })
 
     const overlappingBooking = this.repository.findAll().find((booking) => {
       return (

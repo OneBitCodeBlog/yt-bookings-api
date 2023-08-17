@@ -10,12 +10,13 @@ class BookingController {
 
   save(request) {
     const { roomId, guestName, checkInDate, checkOutDate } = request.body
+    const user = request.user;
 
     if (!roomId || !guestName || !checkInDate || !checkOutDate) {
       return { code: 400, body: { message: "All fields are required." } }
     }
 
-    const booking = this.service.createBooking({ roomId, guestName, checkInDate, checkOutDate })
+    const booking = this.service.createBooking({ user, roomId, guestName, checkInDate, checkOutDate })
 
     return { code: 201, body: { message: "Booking created successfully.", booking } }
   }
