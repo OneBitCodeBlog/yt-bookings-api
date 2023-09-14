@@ -1,4 +1,4 @@
-class UserRepository {
+class UserMemoryRepository {
     constructor() {
         this.users = [];
     }
@@ -12,4 +12,4 @@ class UserRepository {
     }
 }
 
-module.exports = UserRepository;
+module.exports = UserMemoryRepository;

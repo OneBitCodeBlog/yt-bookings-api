@@ -1,4 +1,4 @@
-class BookingRepository {
+class BookingMemoryRepository {
   constructor() {
     this.bookings = []
   }
@@ -12,4 +12,4 @@ class BookingRepository {
   }
 }
 
-module.exports = BookingRepository
+module.exports = BookingMemoryRepository

@@ -5,14 +5,16 @@ class BookingService {
     this.repository = repository
   }
 
-  findAllBookings() {
-    return this.repository.findAll()
+  async findAllBookings() {
+    return await this.repository.findAll()
   }
 
-  createBooking({ user, roomId, guestName, checkInDate, checkOutDate }) {
-    const newBooking = new Booking({ user, roomId, guestName, checkInDate, checkOutDate })
+  async createBooking({ userId, roomId, guestName, checkInDate, checkOutDate }) {
+    const newBooking = new Booking({ userId, roomId, guestName, checkInDate, checkOutDate })
 
-    const overlappingBooking = this.repository.findAll().find((booking) => {
+    const allBookings = await this.repository.findAll()
+
+    const overlappingBooking = allBookings.find((booking) => {
       return (
         booking.roomId === newBooking.roomId &&
         booking.checkInDate < newBooking.checkOutDate &&
@@ -24,7 +26,7 @@ class BookingService {
       throw new Error("The room is already booked for the selected dates.")
     }
 
-    this.repository.create(newBooking)
+    await this.repository.create(newBooking)
     return newBooking
   }
 }
